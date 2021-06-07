@@ -7,7 +7,7 @@
     definition:
       version: '2'
       services:
-        node_exporter:
+        cadvisor:
           image: "{{ cadvisor_image }}"
           container_name: "{{ cadvisor_container_name }}"
           ports:
