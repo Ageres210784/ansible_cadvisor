@@ -1,2 +1,6 @@
 ---
 # handlers file for cadvisor
+- name: Restart cadvisor
+  service:
+    name: cadvisor.service
+    state: restarted

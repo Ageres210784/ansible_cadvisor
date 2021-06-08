@@ -1,6 +1,11 @@
 ---
-# defaults file for cadvisor
+# variables to run in a container
 cadvisor_image: "gcr.io/cadvisor/cadvisor"
 cadvisor_container_name: cadvisor
-cadvisor_host_port: 9100
+cadvisor_host_port: 8080
 cadvisor_docker_network_name: test_net
+run_in_docker: false
+
+# variables to run standalone
+cadvisor_version: "0.39.2"
+cadvisor_config_directory: /var/lib/cadvisor
