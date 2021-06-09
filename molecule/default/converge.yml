@@ -14,7 +14,7 @@
         state: present
 
     - name: Update apt and install docker-ce
-      apt: update_cache=yes name=docker-ce state=latest
+      apt: update_cache=yes name=docker-ce state=present
 
     - name: Install Docker Module for Python
       pip:
