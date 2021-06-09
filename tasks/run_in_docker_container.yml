@@ -1,7 +1,7 @@
 ---
 # tasks file for cadvisor
 - name: Start docker cadvisor container
-  docker_service:
+  community.docker.docker_compose:
     state: present
     project_name: cadvisor
     definition:

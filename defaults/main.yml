@@ -4,7 +4,7 @@ cadvisor_image: "gcr.io/cadvisor/cadvisor"
 cadvisor_container_name: cadvisor
 cadvisor_host_port: 8080
 cadvisor_docker_network_name: test_net
-run_in_docker: false
+run_in_docker: true
 
 # variables to run standalone
 cadvisor_version: "0.39.2"
