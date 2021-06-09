@@ -4,23 +4,10 @@
   become_user: root
   get_url: 
     url: "https://github.com/google/cadvisor/releases/download/v{{ cadvisor_version }}/cadvisor"
-    dest: "{{ cadvisor_config_directory }}-v{{cadvisor_version}}"
-    mode: 0755
-    owner: root
-    group: root
-
-- name: Copy cadvisor to PATH
-  become: yes
-  become_user: root
-  copy:
-    remote_src: yes
-    src: "{{ cadvisor_config_directory }}-v{{cadvisor_version}}"
     dest: /usr/local/bin/cadvisor
     mode: 0755
     owner: root
     group: root
-  notify:
-    - Restart cadvisor
 
 - name: Ensure cadvisor systemd unit
   become: yes
