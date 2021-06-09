@@ -34,5 +34,5 @@
       become: true
 
     - name: Create a docker network
-      docker_service:
+      docker_network:
         name: test_net
