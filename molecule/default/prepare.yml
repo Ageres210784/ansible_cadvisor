@@ -24,8 +24,8 @@
       pip:
         name: "{{ item }}"
       with_items:
-        - docker==5.0.0
-        - docker-compose==1.29.2
+        - docker
+        - docker-compose
 
     - name: Ensure docker deamon is running
       service:
