@@ -22,10 +22,7 @@
 
     - name: Install Docker Module for Python
       pip:
-        name: "{{ item }}"
-      with_items:
-        - docker
-        - docker-compose
+        name: docker
 
     - name: Ensure docker deamon is running
       service:
