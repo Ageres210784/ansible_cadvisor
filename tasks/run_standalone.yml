@@ -2,7 +2,7 @@
 - name: get cadvisor
   become: yes
   become_user: root
-  get_url: 
+  get_url:
     url: "https://github.com/google/cadvisor/releases/download/v{{ cadvisor_version }}/cadvisor"
     dest: /usr/local/bin/cadvisor
     mode: 0755
@@ -30,5 +30,3 @@
     enabled: yes
     daemon_reload: yes
     state: started
-  when:
-    - systemd_unitfile.changed
