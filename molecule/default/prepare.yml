@@ -1,0 +1,42 @@
+---
+- name: Prepare
+  hosts: all
+  tasks:
+    - name: Update apt
+      apt:
+        update_cache: yes
+
+    - name: Install gpg-agent
+      apt:
+        name: gpg-agent
+        state: present
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Install docker-ce
+      apt: name=docker-ce state=present
+
+    - name: Install Docker Module for Python
+      pip:
+        name: "{{ item }} "
+      with_items:
+        - docker
+        - docker-compose
+
+    - name: Ensure docker deamon is running
+      service:
+        name: docker
+        state: started
+      become: true
+
+    - name: Create a docker network
+      community.docker.docker_network:
+        name: test_net

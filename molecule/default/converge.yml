@@ -2,24 +2,6 @@
 - name: Converge
   hosts: all
 
-  tasks:
-    - name: Add Docker GPG apt Key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-    - name: Add Docker Repository
-      apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu bionic stable
-        state: present
-
-    - name: Update apt and install docker-ce
-      apt: update_cache=yes name=docker-ce state=present
-
-    - name: Install Docker Module for Python
-      pip:
-        name: docker
-
   roles:
     - role: cadvisor_ansible_role
       run_in_docker: false
