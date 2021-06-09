@@ -27,6 +27,12 @@
         - docker
         - docker-compose
 
+    - name: Ensure docker deamon is running
+      service:
+        name: docker
+        state: started
+      become: true
+
     - name: Create a docker network
       docker_network:
         name: test_net
