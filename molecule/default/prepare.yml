@@ -2,14 +2,10 @@
 - name: Prepare
   hosts: all
   tasks:
-    - name: Update apt
-      apt:
-        update_cache: yes
-
-    - name: Install gpg-agent
+    - name: Update apt and install gpg-agent
       apt:
         name: gpg-agent
-        state: present
+        update_cache: yes
 
     - name: Add Docker GPG apt Key
       apt_key:
@@ -26,7 +22,7 @@
 
     - name: Install Docker Module for Python
       pip:
-        name: "{{ item }} "
+        name: "{{ item }}"
       with_items:
         - docker
         - docker-compose
