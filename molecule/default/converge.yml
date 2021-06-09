@@ -1,0 +1,9 @@
+---
+- name: Converge
+  hosts: all
+  roles:
+    - role: cadvisor
+      run_in_docker: false
+    - role: cadvisor
+      run_in_docker: true
+
