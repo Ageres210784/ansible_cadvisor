@@ -1,6 +1,8 @@
 ---
 # tasks file for cadvisor
 - name: Start docker cadvisor container
+  become: yes
+  become_user: root
   docker_compose:
     state: present
     project_name: cadvisor
