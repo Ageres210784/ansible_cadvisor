@@ -1,26 +1,20 @@
 ---
 # tasks file for cadvisor
-- name: Start docker cadvisor container
-  docker_compose:
-    state: present
-    project_name: cadvisor
-    definition:
-      version: '2'
-      services:
-        cadvisor:
-          image: "{{ cadvisor_image }}"
-          container_name: "{{ cadvisor_container_name }}"
-          ports:
-            - "{{ cadvisor_host_port }}:8080"
-          volumes:
-            - /:/rootfs:ro
-            - /var/run:/var/run:ro
-            - /sys:/sys:ro
-            - /var/lib/docker/:/var/lib/docker:ro
-            - /dev/disk/:/dev/disk:ro
-          hostname: "{{ ansible_host }}"
-          restart: always
-      networks:
-        default:
-          external:
-            name: "{{ cadvisor_docker_network_name }}"
+- name: Start cadvisor container
+  community.docker.docker_container:
+    name: "{{ cadvisor_container_name }}"
+    image: "{{ cadvisor_image }}"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:ro
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    restart_policy: always
+    hostname: "{{ ansible_host }}"
+    ports:
+      - "{{ cadvisor_host_port }}:8080"
+    networks:
+      default:
+        external:
+          name: "{{ cadvisor_docker_network_name }}"
