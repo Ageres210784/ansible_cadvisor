@@ -4,4 +4,4 @@
 
   roles:
     - role: cadvisor_ansible_role
-      run_in_docker: true
+      run_in_docker: false
