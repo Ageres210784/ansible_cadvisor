@@ -4,6 +4,7 @@ services: docker
 
 env:
   global:
+    - ANSIBLE_VERBOSITY: 4
     - ROLE_NAME: cadvisor
   matrix:
     - MOLECULE_DISTRO: ubuntu2004
