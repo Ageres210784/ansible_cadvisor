@@ -15,7 +15,7 @@ install:
 
 script:
   # Run tests.
-  - molecule test --verbose
+  - molecule test
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/?branch=master
