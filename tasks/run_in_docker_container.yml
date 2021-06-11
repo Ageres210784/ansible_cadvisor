@@ -15,6 +15,4 @@
     ports:
       - "{{ cadvisor_host_port }}:8080"
     networks:
-      default:
-        external:
-          name: "{{ cadvisor_docker_network_name }}"
+      - name: "{{ cadvisor_docker_network_name }}"
