@@ -1,11 +1,13 @@
 ---
 # variables to run in a container
-cadvisor_image: "google/cadvisor:v0.33.0"
+cadvisor_image: "gcr.io/cadvisor/cadvisor:v0.40.0"
 cadvisor_container_name: cadvisor
 cadvisor_host_port: 8000
 cadvisor_docker_network_name: test_net
-run_in_docker: true
+cadvisor_run_in_docker: true
+cadvisor_run_path: /usr/bin/cadvisor
+cadvisor_additional_cmd_args: ""
 
 # variables to run standalone
-cadvisor_version: "0.39.2"
+cadvisor_version: "0.40.0"
 cadvisor_config_directory: /var/lib/cadvisor

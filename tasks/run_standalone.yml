@@ -4,7 +4,7 @@
   become_user: root
   get_url:
     url: "https://github.com/google/cadvisor/releases/download/v{{ cadvisor_version }}/cadvisor"
-    dest: /usr/local/bin/cadvisor
+    dest: "{{ cadvisor_run_path }}"
     mode: 0755
     owner: root
     group: root

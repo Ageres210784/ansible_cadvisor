@@ -12,6 +12,7 @@
         cadvisor:
           image: "{{ cadvisor_image }}"
           container_name: "{{ cadvisor_container_name }}"
+          command: "{{ cadvisor_run_path }} {{ cadvisor_additional_cmd_args }}"
           ports:
             - "{{ cadvisor_host_port }}:8080"
           volumes:

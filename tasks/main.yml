@@ -1,8 +1,8 @@
 ---
 - name: Include docker-related tasks
   include_tasks: run_in_docker_container.yml
-  when: run_in_docker
+  when: cadvisor_run_in_docker
 
 - name: Include standalone tasks
   include_tasks: run_standalone.yml
-  when: not run_in_docker
+  when: not cadvisor_run_in_docker
