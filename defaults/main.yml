@@ -11,3 +11,29 @@ cadvisor_additional_cmd_args: ""
 # variables to run standalone
 cadvisor_version: "0.40.0"
 cadvisor_config_directory: /var/lib/cadvisor
+
+cadvisor_exporter_docker_labels: []
+
+cadvisor_exporter_stack_name: cadvisor_exporter
+cadvisor_exporter_swarm_deploy:
+  mode: global
+
+# example cadvisor_exporter_swarm_deploy:
+#   mode: replicated
+#   replicas: 2
+#   restart_policy:
+#     condition: any
+#     delay: 10s
+#   resources:
+#     limits:
+#       memory: 512M
+#     reservations:
+#       memory: 256M
+#   update_config:
+#     parallelism: 1
+#     delay: 30s
+#     failure_action: rollback
+#   placement:
+#     max_replicas_per_node: 1
+#     constraints:
+#       - node.labels.cadvisor_exporter == true

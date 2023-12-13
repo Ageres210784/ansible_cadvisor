@@ -27,3 +27,52 @@
         default:
           external:
             name: "{{ cadvisor_docker_network_name }}"
+  when: cadvisor_swarm_manager is undefined
+
+- name: Deploy cadvisor_exporter to docker swarm
+  block:
+    - name: Ensure pip installation
+      package:
+        name: "python3-pip"
+        state: present
+
+    - name: Install newer version of pip itself
+      pip:
+        name: "pip"
+        state: latest
+        executable: pip3
+
+    - name: Install jsondiff from pip
+      pip:
+        name: "jsondiff"
+        state: present
+        executable: pip3
+
+    - name: Deploy docker cadvisor_exporter container in swarm
+      community.docker.docker_stack:
+        state: present
+        name: "{{ cadvisor_exporter_stack_name }}"
+        compose:
+          - version: '3.5'
+            services:
+              cadvisor_exporter:
+                image: "{{ cadvisor_image }}"
+                command: "{{ cadvisor_run_path }} {{ cadvisor_additional_cmd_args }}"
+                hostname: "{{ cadvisor_container_name }}"
+                labels: "{{ cadvisor_exporter_docker_labels }}"
+                ports:
+                  - "{{ cadvisor_host_port }}:8080"
+                volumes:
+                  - /:/rootfs:ro
+                  - /var/run:/var/run:ro
+                  - /sys:/sys:ro
+                  - /var/lib/docker/:/var/lib/docker:ro
+                  - /dev/disk/:/dev/disk:ro
+                deploy: "{{ cadvisor_exporter_swarm_deploy }}"
+            networks:
+              default:
+                external:
+                  name: "{{ cadvisor_docker_network_name }}"
+      run_once: True
+  delegate_to: "{{ cadvisor_swarm_manager }}"
+  when: cadvisor_swarm_manager is defined
