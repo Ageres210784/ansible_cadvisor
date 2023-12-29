@@ -56,7 +56,7 @@
         compose:
           - version: '3.5'
             services:
-              cadvisor_exporter:
+              cadvisor:
                 image: "{{ cadvisor_image }}"
                 command: "{{ cadvisor_run_path }} {{ cadvisor_additional_cmd_args }}"
                 hostname: "{{ cadvisor_container_name }}"
