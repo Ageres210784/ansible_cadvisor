@@ -52,6 +52,7 @@
       community.docker.docker_stack:
         state: present
         name: "{{ cadvisor_exporter_stack_name }}"
+        with_registry_auth: yes
         compose:
           - version: '3.5'
             services:
