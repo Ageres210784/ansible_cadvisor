@@ -3,11 +3,10 @@
 - name: Start docker cadvisor container
   become: yes
   become_user: root
-  docker_compose:
+  community.docker.docker_compose_v2:
     state: present
     project_name: cadvisor
     definition:
-      version: '2'
       services:
         cadvisor:
           image: "{{ cadvisor_image }}"
@@ -25,8 +24,8 @@
           restart: always
       networks:
         default:
-          external:
-            name: "{{ cadvisor_docker_network_name }}"
+          external: true
+          name: "{{ cadvisor_docker_network_name }}"
   when: cadvisor_swarm_manager is undefined
 
 - name: Deploy cadvisor_exporter to docker swarm
