@@ -11,7 +11,7 @@
         cadvisor:
           image: "{{ cadvisor_image }}"
           container_name: "{{ cadvisor_container_name }}"
-          command: "{{ cadvisor_run_path }} {{ cadvisor_additional_cmd_args }}"
+          command: "{{ cadvisor_additional_cmd_args }}"
           ports:
             - "{{ cadvisor_host_port }}:8080"
           volumes:
@@ -71,7 +71,7 @@
             services:
               cadvisor:
                 image: "{{ cadvisor_image }}"
-                command: "{{ cadvisor_run_path }} {{ cadvisor_additional_cmd_args }}"
+                command: "{{ cadvisor_additional_cmd_args }}"
                 hostname: "{{ cadvisor_container_name }}"
                 labels: "{{ cadvisor_exporter_docker_labels }}"
                 ports:
@@ -85,8 +85,8 @@
                 deploy: "{{ cadvisor_exporter_swarm_deploy }}"
             networks:
               default:
-                external:
-                  name: "{{ cadvisor_docker_network_name }}"
+                name: "{{ cadvisor_docker_network_name }}"
+                external: true
       run_once: True
   delegate_to: "{{ cadvisor_swarm_manager }}"
   when: cadvisor_swarm_manager is defined
